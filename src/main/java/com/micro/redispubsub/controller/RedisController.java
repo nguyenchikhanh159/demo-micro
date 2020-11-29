@@ -8,24 +8,29 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.listener.RedisMessageListenerContainer;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController("/api/redis")
+@RestController
+@RequestMapping("/api/redis")
 public class RedisController {
-    private static Logger logger = LoggerFactory.getLogger(RestController.class);
+
+    private static Logger logger = LoggerFactory.getLogger(RedisController.class);
+
     @Autowired
     private RedismessagePublisher messagePublisher;
 
+
     @PostMapping("/publish")
-    public void publish(@RequestBody Message message){
-        logger.info(">> publishing : {} ",message);
+    public void publish(@RequestBody Message message) {
+        logger.info(">> publishing : {}", message);
         messagePublisher.publish(message.toString());
     }
-    public List<String> getMessage(){
+
+    @GetMapping("/subscribe")
+    public List<String> getMessages(){
         return RedismessageSubcribe.messageList;
     }
+
 }

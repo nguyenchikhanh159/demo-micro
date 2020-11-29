@@ -10,9 +10,10 @@ import java.util.ArrayList;
 @Service
 public class RedismessageSubcribe implements MessageListener {
     public static List<String> messageList = new ArrayList<>();
+
     @Override
-    public void onMessage(Message message, byte[] bytes){
+    public void onMessage(Message message, byte[] bytes) {
         messageList.add(message.toString());
-        System.out.println("Message received" + message.toString());
+        System.out.println("Message received : "+message.toString());
     }
 }

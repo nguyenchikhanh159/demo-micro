@@ -27,11 +27,11 @@ public class RedisConfiguration {
     @Bean
     MessageListenerAdapter messageListenerAdapter()
     {
-        return new MessageListenerAdapter(new RedisMessageSubscriber(),"onMessage");
+        return new MessageListenerAdapter(new RedismessageSubcribe(),"onMessage");
     }
     @Bean
     public ChannelTopic topic() {
-        return new ChannelTopic("stackfortech");
+        return new ChannelTopic("test-micro");
     }
 
     @Bean

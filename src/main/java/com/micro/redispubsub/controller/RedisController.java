@@ -22,15 +22,19 @@ public class RedisController {
     private RedismessagePublisher messagePublisher;
 
 
-    @PostMapping("/publish")
+    @PostMapping(value="/publish")
     public void publish(@RequestBody Message message) {
         logger.info(">> publishing : {}", message);
         messagePublisher.publish(message.toString());
     }
 
-    @GetMapping("/subscribe")
+    @GetMapping(value= "/subscribe")
     public List<String> getMessages(){
         return RedismessageSubcribe.messageList;
+    }
+    @GetMapping(value = "/subscribex")
+    public int abc(){
+       return -1;
     }
 
 }
